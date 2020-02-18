@@ -30,4 +30,4 @@ We are currently looking into how a VST works and it’s core features in order 
   * Try out some library examples
 
 
-## Summary: We are trying to create a VST in C/C++
+**Summary: We are trying to create a VST in C/C++**
