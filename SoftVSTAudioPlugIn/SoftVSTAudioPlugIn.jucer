@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="XVrzo7" name="SoftVSTAudioPlugIn" projectType="audioplug"
-              jucerVersion="5.4.7">
+              jucerVersion="5.4.7" pluginCharacteristicsValue="pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="HS7gkn" name="SoftVSTAudioPlugIn">
     <GROUP id="{58B60B78-4618-ADDD-6AFB-BF0547DBAA83}" name="Source">
       <FILE id="FOOOlc" name="PluginProcessor.cpp" compile="1" resource="0"
