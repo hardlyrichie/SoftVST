@@ -155,9 +155,6 @@ void SoftVstAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer
         auto* channelData = buffer.getWritePointer (channel);
 
         // ..do something to the data...
-		for (int sample = 0; sample < buffer.getNumSamples(); sample++) {
-			channelData[sample] *= Decibels::decibelsToGain(gain);
-		}
     }
 }
 
