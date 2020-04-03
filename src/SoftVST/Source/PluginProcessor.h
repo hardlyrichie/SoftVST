@@ -65,8 +65,8 @@ public:
 	AudioProcessorValueTreeState::ParameterLayout createParameters();
 
 private:
-	Synthesiser mySynth;
-	SynthVoice* myVoice;
+	Synthesiser synth;
+	SynthVoice* synthVoice;
 
 	double lastSampleRate;
 

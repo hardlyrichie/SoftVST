@@ -52,9 +52,13 @@ public:
 
 	}
 
+	void setAttack(float* attack)
+	{
+		env1.setAttack(*attack);
+	}
+
 	void renderNextBlock(AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 	{
-		env1.setAttack(2000);
 		env1.setDecay(500);
 		env1.setSustain(0.8);
 		env1.setRelease(2000);
@@ -63,7 +67,7 @@ public:
 		{
 			double wave = osc1.saw(frequency);
 			double sound = env1.adsr(wave, env1.trigger) * level;
-			double filteredSound = filter1.lores(sound, 100, 0.1);
+			double filteredSound = filter1.lores(sound, 1000, 0.1);
 
 			for (int channel = 0; channel < outputBuffer.getNumChannels(); channel++)
 			{

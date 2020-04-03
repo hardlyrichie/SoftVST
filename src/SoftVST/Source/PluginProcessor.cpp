@@ -25,16 +25,16 @@ SoftVstAudioProcessor::SoftVstAudioProcessor()
 						apvts(*this, nullptr, "Parameters", createParameters())
 #endif
 {
-	mySynth.clearVoices();
+	synth.clearVoices();
 
 	// Polyphonic synthesiser with 5 voices
 	for (int i = 0; i < 5; i++)
 	{
-		mySynth.addVoice(new SynthVoice());
+		synth.addVoice(new SynthVoice());
 	}
 
-	mySynth.clearSounds();
-	mySynth.addSound(new SynthSound());
+	synth.clearSounds();
+	synth.addSound(new SynthSound());
 
 	DBG("****SoftVST Plugin Loaded****");
 }
@@ -112,7 +112,7 @@ void SoftVstAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
     // initialisation that you need..
 	ignoreUnused(samplesPerBlock);
 	lastSampleRate = sampleRate;
-	mySynth.setCurrentPlaybackSampleRate(lastSampleRate);
+	synth.setCurrentPlaybackSampleRate(lastSampleRate);
 }
 
 void SoftVstAudioProcessor::releaseResources()
@@ -147,12 +147,19 @@ bool SoftVstAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) 
 
 void SoftVstAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
-	float* sliderValue = (float*)apvts.getRawParameterValue(ATTACK_ID);
-	Logger::outputDebugString(std::to_string(*sliderValue));
+	for (int i = 0; i < synth.getNumVoices(); i++)
+	{
+		if ((synthVoice = dynamic_cast<SynthVoice*>(synth.getVoice(i))))
+		{
+			float* attackValue = (float*)apvts.getRawParameterValue(ATTACK_ID);
+			synthVoice->setAttack(attackValue);
+		}
+	}
+
 
 	buffer.clear();
 
-	mySynth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
+	synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }
 
 //==============================================================================
