@@ -192,11 +192,11 @@ AudioProcessorValueTreeState::ParameterLayout SoftVstAudioProcessor::createParam
 	std::vector<std::unique_ptr<RangedAudioParameter>> parameters;
 
 	// ADSR parameters 
-	// TODO: Fix default values
-	parameters.push_back(std::make_unique<AudioParameterFloat>(ATTACK_ID, ATTACK_NAME, 0.1f, 5000.0f, 1.0f));
-	parameters.push_back(std::make_unique<AudioParameterFloat>(DECAY_ID, DECAY_NAME, 0.1f, 5000.0f, 1.0f));
-	parameters.push_back(std::make_unique<AudioParameterFloat>(SUSTAIN_ID, SUSTAIN_NAME, 0.1f, 5000.0f, 1.0f));
-	parameters.push_back(std::make_unique<AudioParameterFloat>(RELEASE_ID, RELEASE_NAME, 0.1f, 5000.0f, 1.0f));
+	// TODO: Look into and fix sustain range
+	parameters.push_back(std::make_unique<AudioParameterFloat>(ATTACK_ID, ATTACK_NAME, 0.0f, 5000.0f, 0.5f));
+	parameters.push_back(std::make_unique<AudioParameterFloat>(DECAY_ID, DECAY_NAME, 0.0f, 5000.0f, 1000.0f));
+	parameters.push_back(std::make_unique<AudioParameterFloat>(SUSTAIN_ID, SUSTAIN_NAME, 0.0f, 5000.0f, 0.1f));
+	parameters.push_back(std::make_unique<AudioParameterFloat>(RELEASE_ID, RELEASE_NAME, 0.0f, 5000.0f, 15.0f));
 
 	// Oscillator parameter
 	parameters.push_back(std::make_unique<AudioParameterChoice>(OSC_ID, OSC_NAME,
