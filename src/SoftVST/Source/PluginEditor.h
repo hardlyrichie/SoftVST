@@ -16,8 +16,7 @@
 //==============================================================================
 /**
 */
-class SoftVstAudioProcessorEditor  : public AudioProcessorEditor,
-	public Slider::Listener
+class SoftVstAudioProcessorEditor  : public AudioProcessorEditor
 {
 public:
     SoftVstAudioProcessorEditor (SoftVstAudioProcessor&);
@@ -27,10 +26,10 @@ public:
     void paint (Graphics&) override;
     void resized() override;
 
-	void sliderValueChanged(Slider* slider) override;
-
 private:
 	Slider attackSlider;
+
+	std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> attackSliderAttachment;
 
     SoftVstAudioProcessor& processor;
 

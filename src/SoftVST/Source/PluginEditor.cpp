@@ -19,13 +19,17 @@ SoftVstAudioProcessorEditor::SoftVstAudioProcessorEditor (SoftVstAudioProcessor&
     // editor's size to whatever you need it to be.
     setSize (400, 300);
 
-	// Setup ADSR slider settings
+	// Configure ADSR slider settings
 	attackSlider.setSliderStyle(Slider::SliderStyle::Rotary);
 	attackSlider.setRange(0.1f, 5000.0f);
 	attackSlider.setValue(0.1f);
-	attackSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 20.0, 10.0);
-	attackSlider.addListener(this);
+	//attackSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 20.0, 10.0);
 	addAndMakeVisible(attackSlider);
+
+	// Setup apvts attachments
+	attackSliderAttachment = 
+		std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(processor.apvts, 
+		ATTACK_ID, attackSlider);
 }
 
 SoftVstAudioProcessorEditor::~SoftVstAudioProcessorEditor()
@@ -45,13 +49,8 @@ void SoftVstAudioProcessorEditor::paint (Graphics& g)
 
 void SoftVstAudioProcessorEditor::resized()
 {
-	attackSlider.setBounds(10, 10, 100, 100);
-}
+	auto bounds = getLocalBounds();
+	const int componentSize{ 150 };
 
-void SoftVstAudioProcessorEditor::sliderValueChanged(Slider* slider)
-{
-	if (slider == &attackSlider)
-	{
-		processor.attackTime = attackSlider.getValue();
-	}
+	attackSlider.setBounds(bounds.removeFromTop(200).withSizeKeepingCentre(componentSize, componentSize));
 }

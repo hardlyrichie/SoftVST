@@ -147,6 +147,9 @@ bool SoftVstAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) 
 
 void SoftVstAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
+	float* sliderValue = (float*)apvts.getRawParameterValue(ATTACK_ID);
+	Logger::outputDebugString(std::to_string(*sliderValue));
+
 	buffer.clear();
 
 	mySynth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
