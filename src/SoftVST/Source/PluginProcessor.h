@@ -1,19 +1,11 @@
-/*
-  ==============================================================================
-
-    This file was auto-generated!
-
-    It contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <JuceHeader.h>
 #include "SynthSound.h"
 #include "SynthVoice.h"
 
+#define OSC_ID "OSC"
+#define OSC_NAME "Osc"
 #define ATTACK_ID "ATTACK"
 #define ATTACK_NAME "Attack"
 
@@ -60,7 +52,6 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
-	float attackTime;
 	AudioProcessorValueTreeState apvts;
 	AudioProcessorValueTreeState::ParameterLayout createParameters();
 

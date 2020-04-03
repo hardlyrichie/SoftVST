@@ -1,17 +1,8 @@
-/*
-  ==============================================================================
-
-    This file was auto-generated!
-
-    It contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "Oscillator.h"
 
 //==============================================================================
 /**
@@ -27,9 +18,17 @@ public:
     void resized() override;
 
 private:
-	Slider attackSlider;
+	Oscillator oscGUI;
 
-	std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> attackSliderAttachment;
+	//Slider attackSlider;
+	//Slider decaySlider;
+	//Slider sustainSlider;
+	//Slider releaseSlider;
+
+	//std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> attackSliderAttachment;
+	//std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> decaySliderAttachment;
+	//std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> sustainSliderAttachment;
+	//std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> releaseSliderAttachment;
 
     SoftVstAudioProcessor& processor;
 

@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    SynthVoice.h
-    Created: 2 Apr 2020 6:15:58pm
-    Author:  rgao
-
-  ==============================================================================
-*/
-
 #pragma once
 #include <JuceHeader.h>
 #include "SynthSound.h"
@@ -52,21 +42,45 @@ public:
 
 	}
 
-	void setAttack(float* attack)
+	void setOscType(float* type)
 	{
+		wave = *type;
+	}
+
+	double getOscType()
+	{
+		switch (wave)
+		{
+			case 0:
+				return osc1.sinewave(frequency);
+			case 1:
+				return osc1.saw(frequency);
+			case 2:
+				return osc1.square(frequency);
+			default:
+				// TODO: throw exception if none of the waves are selected
+				return osc1.sinewave(frequency);
+		}
+	}
+
+	void setADSR(float* attack)
+	{
+		//, float* decay, float* sustain, float* release
 		env1.setAttack(*attack);
+		/*env1.setDecay(*decay);
+		env1.setSustain(*sustain);
+		env1.setRelease(*release);*/
 	}
 
 	void renderNextBlock(AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 	{
-		env1.setDecay(500);
-		env1.setSustain(0.8);
-		env1.setRelease(2000);
+		env1.setDecay(100);
+		env1.setSustain(50);
+		env1.setRelease(500);
 
 		for (int sample = 0; sample < numSamples; sample++)
 		{
-			double wave = osc1.saw(frequency);
-			double sound = env1.adsr(wave, env1.trigger) * level;
+			double sound = env1.adsr(getOscType(), env1.trigger) * level;
 			double filteredSound = filter1.lores(sound, 1000, 0.1);
 
 			for (int channel = 0; channel < outputBuffer.getNumChannels(); channel++)
@@ -81,6 +95,7 @@ public:
 private:
 	double level;
 	double frequency;
+	int wave;
 	
 	maxiOsc osc1;
 	maxiEnv env1;

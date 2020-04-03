@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    This file was auto-generated!
-
-    It contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
-
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
@@ -21,8 +11,7 @@ SoftVstAudioProcessor::SoftVstAudioProcessor()
                       #endif
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
-                       ), attackTime(0.1f),
-						apvts(*this, nullptr, "Parameters", createParameters())
+                       ), apvts(*this, nullptr, "Parameters", createParameters())
 #endif
 {
 	synth.clearVoices();
@@ -108,8 +97,6 @@ void SoftVstAudioProcessor::changeProgramName (int index, const String& newName)
 //==============================================================================
 void SoftVstAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
 	ignoreUnused(samplesPerBlock);
 	lastSampleRate = sampleRate;
 	synth.setCurrentPlaybackSampleRate(lastSampleRate);
@@ -151,8 +138,11 @@ void SoftVstAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer
 	{
 		if ((synthVoice = dynamic_cast<SynthVoice*>(synth.getVoice(i))))
 		{
-			float* attackValue = (float*)apvts.getRawParameterValue(ATTACK_ID);
-			synthVoice->setAttack(attackValue);
+			float* osc = (float*)apvts.getRawParameterValue(OSC_ID);
+			synthVoice->setOscType(osc);
+
+			float* attack = (float*)apvts.getRawParameterValue(ATTACK_ID);
+			synthVoice->setADSR(attack);
 		}
 	}
 
@@ -197,6 +187,10 @@ AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 AudioProcessorValueTreeState::ParameterLayout SoftVstAudioProcessor::createParameters()
 {
 	std::vector<std::unique_ptr<RangedAudioParameter>> parameters;
+
+	// Oscillator parameter
+	parameters.push_back(std::make_unique<AudioParameterChoice>(OSC_ID, OSC_NAME,
+		StringArray("Sine", "Saw", "Square"), 0));
 
 	// ADSR parameters
 	parameters.push_back(std::make_unique<AudioParameterFloat>(ATTACK_ID, ATTACK_NAME, 0.1f, 5000.0f, 1.0f));

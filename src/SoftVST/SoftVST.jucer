@@ -27,6 +27,8 @@
         <FILE id="z4QLhs" name="stb_vorbis.c" compile="1" resource="0" file="../Maximilian/stb_vorbis.c"/>
         <FILE id="JJtxl9" name="stb_vorbis.h" compile="0" resource="0" file="../Maximilian/stb_vorbis.h"/>
       </GROUP>
+      <FILE id="JY4RJD" name="Oscillator.h" compile="0" resource="0" file="Source/Oscillator.h"/>
+      <FILE id="ttKGKi" name="Oscillator.cpp" compile="1" resource="0" file="Source/Oscillator.cpp"/>
       <FILE id="nrmDoy" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="APTSeu" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <FILE id="PD0uuG" name="PluginProcessor.cpp" compile="1" resource="0"
