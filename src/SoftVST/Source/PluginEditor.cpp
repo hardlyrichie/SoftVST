@@ -3,41 +3,12 @@
 
 //==============================================================================
 SoftVstAudioProcessorEditor::SoftVstAudioProcessorEditor (SoftVstAudioProcessor& p)
-    : AudioProcessorEditor (&p), processor (p), oscGUI(p)
+    : AudioProcessorEditor (&p), processor (p), envGUI(p), oscGUI(p)
 {
-    setSize (400, 200);
+    setSize (800, 800);
 
+	addAndMakeVisible(envGUI);
 	addAndMakeVisible(oscGUI);
-
-	// Configure ADSR slider settings
-	/*attackSlider.setSliderStyle(Slider::SliderStyle::Rotary);
-	attackSlider.setRange(0.1f, 5000.0f);
-	attackSlider.setValue(1.0f);
-	attackSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 70, 20);
-	addAndMakeVisible(attackSlider);
-
-	decaySlider.setSliderStyle(Slider::SliderStyle::Rotary);
-	decaySlider.setRange(0.1f, 5000.0f);
-	decaySlider.setValue(1.0f);
-	decaySlider.setTextBoxStyle(Slider::TextBoxBelow, true, 70, 20);
-	addAndMakeVisible(attackSlider);
-
-	sustainSlider.setSliderStyle(Slider::SliderStyle::Rotary);
-	sustainSlider.setRange(0.1f, 5000.0f);
-	sustainSlider.setValue(1.0f);
-	sustainSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 70, 20);
-	addAndMakeVisible(attackSlider);
-
-	releaseSlider.setSliderStyle(Slider::SliderStyle::Rotary);
-	releaseSlider.setRange(0.1f, 5000.0f);
-	releaseSlider.setValue(1.0f);
-	releaseSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 70, 20);
-	addAndMakeVisible(attackSlider);*/
-
-	//// Setup apvts attachments
-	//attackSliderAttachment = 
-	//	std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(processor.apvts, 
-	//	ATTACK_ID, attackSlider);
 }
 
 SoftVstAudioProcessorEditor::~SoftVstAudioProcessorEditor()
@@ -61,9 +32,10 @@ void SoftVstAudioProcessorEditor::resized()
 {
 	juce::Rectangle<int> area = getLocalBounds();
 	
-	const int componentWidth = 200;
-	const int componentHeight = 200;
+	const int componentWidth = 400;
+	const int componentHeight = 400;
 
+	envGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
 	oscGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
 
 	//const int componentSize{ 100 };

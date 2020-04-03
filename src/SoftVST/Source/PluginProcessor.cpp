@@ -142,7 +142,10 @@ void SoftVstAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer
 			synthVoice->setOscType(osc);
 
 			float* attack = (float*)apvts.getRawParameterValue(ATTACK_ID);
-			synthVoice->setADSR(attack);
+			float* decay = (float*)apvts.getRawParameterValue(DECAY_ID);
+			float* sustain = (float*)apvts.getRawParameterValue(SUSTAIN_ID);
+			float* release = (float*)apvts.getRawParameterValue(RELEASE_ID);
+			synthVoice->setADSR(attack, decay, sustain, release);
 		}
 	}
 
@@ -188,12 +191,17 @@ AudioProcessorValueTreeState::ParameterLayout SoftVstAudioProcessor::createParam
 {
 	std::vector<std::unique_ptr<RangedAudioParameter>> parameters;
 
+	// ADSR parameters 
+	// TODO: Fix default values
+	parameters.push_back(std::make_unique<AudioParameterFloat>(ATTACK_ID, ATTACK_NAME, 0.1f, 5000.0f, 1.0f));
+	parameters.push_back(std::make_unique<AudioParameterFloat>(DECAY_ID, DECAY_NAME, 0.1f, 5000.0f, 1.0f));
+	parameters.push_back(std::make_unique<AudioParameterFloat>(SUSTAIN_ID, SUSTAIN_NAME, 0.1f, 5000.0f, 1.0f));
+	parameters.push_back(std::make_unique<AudioParameterFloat>(RELEASE_ID, RELEASE_NAME, 0.1f, 5000.0f, 1.0f));
+
 	// Oscillator parameter
 	parameters.push_back(std::make_unique<AudioParameterChoice>(OSC_ID, OSC_NAME,
 		StringArray("Sine", "Saw", "Square"), 0));
 
-	// ADSR parameters
-	parameters.push_back(std::make_unique<AudioParameterFloat>(ATTACK_ID, ATTACK_NAME, 0.1f, 5000.0f, 1.0f));
 
 	return { parameters.begin(), parameters.end() };
 }

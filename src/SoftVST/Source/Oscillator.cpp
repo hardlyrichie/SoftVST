@@ -14,7 +14,7 @@
 //==============================================================================
 Oscillator::Oscillator(SoftVstAudioProcessor& p) : processor(p)
 {
-	setSize(200, 200);
+	setSize(400, 400);
 
 	oscMenu.addItem("Sine", 1);
 	oscMenu.addItem("Saw", 2);
@@ -50,6 +50,7 @@ void Oscillator::paint (Graphics& g)
     //g.setFont (14.0f);
     //g.drawText ("Oscillator", getLocalBounds(),
     //            Justification::centred, true);   // draw some placeholder text
+	g.fillAll(Colours::black);
 }
 
 void Oscillator::resized()

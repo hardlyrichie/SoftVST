@@ -4,10 +4,16 @@
 #include "SynthSound.h"
 #include "SynthVoice.h"
 
-#define OSC_ID "OSC"
-#define OSC_NAME "Osc"
 #define ATTACK_ID "ATTACK"
 #define ATTACK_NAME "Attack"
+#define DECAY_ID "DECAY"
+#define DECAY_NAME "Decay"
+#define SUSTAIN_ID "SUSTAIN"
+#define SUSTAIN_NAME "Sustain"
+#define RELEASE_ID "RELEASE"
+#define RELEASE_NAME "Release"
+#define OSC_ID "OSC"
+#define OSC_NAME "Osc"
 
 //==============================================================================
 /**

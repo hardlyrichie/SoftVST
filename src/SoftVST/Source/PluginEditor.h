@@ -2,6 +2,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "Envelope.h"
 #include "Oscillator.h"
 
 //==============================================================================
@@ -18,17 +19,8 @@ public:
     void resized() override;
 
 private:
+	Envelope envGUI;
 	Oscillator oscGUI;
-
-	//Slider attackSlider;
-	//Slider decaySlider;
-	//Slider sustainSlider;
-	//Slider releaseSlider;
-
-	//std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> attackSliderAttachment;
-	//std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> decaySliderAttachment;
-	//std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> sustainSliderAttachment;
-	//std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> releaseSliderAttachment;
 
     SoftVstAudioProcessor& processor;
 

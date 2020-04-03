@@ -63,29 +63,24 @@ public:
 		}
 	}
 
-	void setADSR(float* attack)
+	void setADSR(float* attack, float* decay, float* sustain, float* release)
 	{
-		//, float* decay, float* sustain, float* release
 		env1.setAttack(*attack);
-		/*env1.setDecay(*decay);
+		env1.setDecay(*decay);
 		env1.setSustain(*sustain);
-		env1.setRelease(*release);*/
+		env1.setRelease(*release);
 	}
 
 	void renderNextBlock(AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 	{
-		env1.setDecay(100);
-		env1.setSustain(50);
-		env1.setRelease(500);
-
 		for (int sample = 0; sample < numSamples; sample++)
 		{
 			double sound = env1.adsr(getOscType(), env1.trigger) * level;
-			double filteredSound = filter1.lores(sound, 1000, 0.1);
+			// double filteredSound = filter1.lores(sound, 1000, 0.1);
 
 			for (int channel = 0; channel < outputBuffer.getNumChannels(); channel++)
 			{
-				outputBuffer.addSample(channel, startSample, filteredSound);
+				outputBuffer.addSample(channel, startSample, sound);
 			}
 
 			startSample++;

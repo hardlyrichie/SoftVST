@@ -4,6 +4,8 @@
               pluginFormats="buildVST3" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="kcg9F3" name="SoftVST">
     <GROUP id="{BAE62B3D-9893-EA19-A861-AFFEAFC9A348}" name="Source">
+      <FILE id="BDktCg" name="Envelope.cpp" compile="1" resource="0" file="Source/Envelope.cpp"/>
+      <FILE id="q0nCCq" name="Envelope.h" compile="0" resource="0" file="Source/Envelope.h"/>
       <GROUP id="{C73660D5-1A5B-FC2A-6AE0-F0214CB0AD92}" name="Maximilian">
         <GROUP id="{C3A40EDC-3BBC-9340-2708-DCF5630FD36E}" name="libs">
           <FILE id="oti8ET" name="fft.cpp" compile="1" resource="0" file="../Maximilian/libs/fft.cpp"/>
