@@ -21,7 +21,8 @@ SoftVstAudioProcessor::SoftVstAudioProcessor()
                       #endif
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ), attackTime(0.1f),
+						apvts(*this, nullptr, "Parameters", createParameters())
 #endif
 {
 	mySynth.clearVoices();
@@ -181,4 +182,14 @@ void SoftVstAudioProcessor::setStateInformation (const void* data, int sizeInByt
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new SoftVstAudioProcessor();
+}
+
+AudioProcessorValueTreeState::ParameterLayout SoftVstAudioProcessor::createParameters()
+{
+	std::vector<std::unique_ptr<RangedAudioParameter>> parameters;
+
+	// ADSR parameters
+	parameters.push_back(std::make_unique<AudioParameterFloat>(ATTACK_ID, ATTACK_NAME, 0.1f, 5000.0f, 1.0f));
+
+	return { parameters.begin(), parameters.end() };
 }

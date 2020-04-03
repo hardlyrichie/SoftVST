@@ -18,6 +18,14 @@ SoftVstAudioProcessorEditor::SoftVstAudioProcessorEditor (SoftVstAudioProcessor&
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (400, 300);
+
+	// Setup ADSR slider settings
+	attackSlider.setSliderStyle(Slider::SliderStyle::Rotary);
+	attackSlider.setRange(0.1f, 5000.0f);
+	attackSlider.setValue(0.1f);
+	attackSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 20.0, 10.0);
+	attackSlider.addListener(this);
+	addAndMakeVisible(attackSlider);
 }
 
 SoftVstAudioProcessorEditor::~SoftVstAudioProcessorEditor()
@@ -37,6 +45,13 @@ void SoftVstAudioProcessorEditor::paint (Graphics& g)
 
 void SoftVstAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+	attackSlider.setBounds(10, 10, 100, 100);
+}
+
+void SoftVstAudioProcessorEditor::sliderValueChanged(Slider* slider)
+{
+	if (slider == &attackSlider)
+	{
+		processor.attackTime = attackSlider.getValue();
+	}
 }

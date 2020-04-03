@@ -14,6 +14,9 @@
 #include "SynthSound.h"
 #include "SynthVoice.h"
 
+#define ATTACK_ID "ATTACK"
+#define ATTACK_NAME "Attack"
+
 //==============================================================================
 /**
 */
@@ -56,6 +59,10 @@ public:
     //==============================================================================
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+
+	float attackTime;
+	AudioProcessorValueTreeState apvts;
+	AudioProcessorValueTreeState::ParameterLayout createParameters();
 
 private:
 	Synthesiser mySynth;
