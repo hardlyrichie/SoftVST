@@ -23,6 +23,9 @@ private:
 	Envelope envGUI;
 	Oscillator oscGUI;
 	Filter filterGUI;
+	Slider gainSlider;
+
+	std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> gainSliderAttachment;
 
     SoftVstAudioProcessor& processor;
 

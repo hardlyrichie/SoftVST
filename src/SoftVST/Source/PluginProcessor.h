@@ -20,6 +20,8 @@
 #define FREQ_NAME "Freq"
 #define RES_ID "RES"
 #define RES_NAME "Res"
+#define GAIN_ID "GAIN"
+#define GAIN_NAME "Gain"
 
 //==============================================================================
 /**

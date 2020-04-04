@@ -151,6 +151,10 @@ void SoftVstAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer
 			float* freq = (float*)apvts.getRawParameterValue(FREQ_ID);
 			float* res = (float*)apvts.getRawParameterValue(RES_ID);
 			synthVoice->setFilter(filter, freq, res);
+
+			float* gain = (float*)apvts.getRawParameterValue(GAIN_ID);
+			Logger::outputDebugString(std::to_string(*gain));
+			synthVoice->setGain(gain);
 		}
 	}
 
@@ -212,6 +216,9 @@ AudioProcessorValueTreeState::ParameterLayout SoftVstAudioProcessor::createParam
 		StringArray("Low-pass", "High-pass", "Band-pass"), 0));
 	parameters.push_back(std::make_unique<AudioParameterFloat>(FREQ_ID, FREQ_NAME, 20.0f, 10000.0f, 400.0f));
 	parameters.push_back(std::make_unique<AudioParameterFloat>(RES_ID, RES_NAME, 1.0f, 5.0f, 1.0f));
+
+	// Master gain parameter
+	parameters.push_back(std::make_unique<AudioParameterFloat>(GAIN_ID, GAIN_NAME, -60.0f, 0.0f, -20.0f));
 
 
 	return { parameters.begin(), parameters.end() };

@@ -78,6 +78,11 @@ public:
 		this->res = *res;
 	}
 
+	void setGain(float* gain)
+	{
+		this->gain = *gain;
+	}
+
 	double getSound()
 	{
 		double sound = env.adsr(getOscType(), env.trigger) * level;
@@ -100,7 +105,7 @@ public:
 		{
 			for (int channel = 0; channel < outputBuffer.getNumChannels(); channel++)
 			{
-				outputBuffer.addSample(channel, startSample, getSound());
+				outputBuffer.addSample(channel, startSample, getSound() * Decibels::decibelsToGain(gain));
 			}
 
 			startSample++;
@@ -114,6 +119,7 @@ private:
 	int filterType;
 	double freq;
 	double res;
+	double gain;
 	
 	maxiOsc osc1;
 	maxiEnv env;

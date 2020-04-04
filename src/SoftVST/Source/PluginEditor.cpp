@@ -7,9 +7,19 @@ SoftVstAudioProcessorEditor::SoftVstAudioProcessorEditor (SoftVstAudioProcessor&
 {
     setSize (800, 800);
 
+	gainSlider.setSliderStyle(Slider::SliderStyle::LinearVertical);
+	gainSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 50, 20);
+	gainSlider.setRange(-60.0f, 0.0f, 0.01f);
+	gainSlider.setValue(-20.0f);
+	addAndMakeVisible(gainSlider);
+
 	addAndMakeVisible(envGUI);
 	addAndMakeVisible(oscGUI);
 	addAndMakeVisible(filterGUI);
+
+	gainSliderAttachment =
+		std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(processor.apvts,
+			GAIN_ID, gainSlider);
 }
 
 SoftVstAudioProcessorEditor::~SoftVstAudioProcessorEditor()
@@ -39,6 +49,7 @@ void SoftVstAudioProcessorEditor::resized()
 	//envGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
 	//oscGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
 	filterGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
+	gainSlider.setBounds(getWidth() / 2 - 50, getHeight() / 2 - 75, 100, 150);
 
 	//const int componentSize{ 100 };
 }
