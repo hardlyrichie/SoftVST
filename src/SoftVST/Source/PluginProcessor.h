@@ -14,6 +14,12 @@
 #define RELEASE_NAME "Release"
 #define OSC_ID "OSC"
 #define OSC_NAME "Osc"
+#define FILTER_ID "FILTER"
+#define FILTER_NAME "Filter"
+#define FREQ_ID "FREQ"
+#define FREQ_NAME "Freq"
+#define RES_ID "RES"
+#define RES_NAME "Res"
 
 //==============================================================================
 /**

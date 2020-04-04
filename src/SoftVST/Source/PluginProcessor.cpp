@@ -146,6 +146,11 @@ void SoftVstAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer
 			float* sustain = (float*)apvts.getRawParameterValue(SUSTAIN_ID);
 			float* release = (float*)apvts.getRawParameterValue(RELEASE_ID);
 			synthVoice->setADSR(attack, decay, sustain, release);
+
+			float* filter = (float*)apvts.getRawParameterValue(FILTER_ID);
+			float* freq = (float*)apvts.getRawParameterValue(FREQ_ID);
+			float* res = (float*)apvts.getRawParameterValue(RES_ID);
+			synthVoice->setFilter(filter, freq, res);
 		}
 	}
 
@@ -201,6 +206,12 @@ AudioProcessorValueTreeState::ParameterLayout SoftVstAudioProcessor::createParam
 	// Oscillator parameter
 	parameters.push_back(std::make_unique<AudioParameterChoice>(OSC_ID, OSC_NAME,
 		StringArray("Sine", "Saw", "Square"), 0));
+
+	// Filter parameters
+	parameters.push_back(std::make_unique<AudioParameterChoice>(FILTER_ID, FILTER_NAME,
+		StringArray("Low-pass", "High-pass", "Band-pass"), 0));
+	parameters.push_back(std::make_unique<AudioParameterFloat>(FREQ_ID, FREQ_NAME, 20.0f, 10000.0f, 400.0f));
+	parameters.push_back(std::make_unique<AudioParameterFloat>(RES_ID, RES_NAME, 1.0f, 5.0f, 1.0f));
 
 
 	return { parameters.begin(), parameters.end() };

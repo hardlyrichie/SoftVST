@@ -14,7 +14,7 @@ public:
 	void startNote(int midiNoteNumber, float velocity, SynthesiserSound* sound, int
 		currentPitchWheelPosition)
 	{
-		env1.trigger = 1;
+		env.trigger = 1;
 		level = velocity;
 
 		frequency = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
@@ -23,7 +23,7 @@ public:
 
 	void stopNote(float velocity, bool allowTailOff)
 	{
-		env1.trigger = 0;
+		env.trigger = 0;
 		allowTailOff = true;
 
 		if (velocity == 0)
@@ -65,22 +65,42 @@ public:
 
 	void setADSR(float* attack, float* decay, float* sustain, float* release)
 	{
-		env1.setAttack(*attack);
-		env1.setDecay(*decay);
-		env1.setSustain(*sustain);
-		env1.setRelease(*release);
+		env.setAttack(*attack);
+		env.setDecay(*decay);
+		env.setSustain(*sustain);
+		env.setRelease(*release);
+	}
+
+	void setFilter(float* type, float* freq, float* res)
+	{
+		filterType = *type;
+		this->freq = *freq;
+		this->res = *res;
+	}
+
+	double getSound()
+	{
+		double sound = env.adsr(getOscType(), env.trigger) * level;
+		switch (filterType)
+		{
+			case 0:
+				return filter.lores(sound, freq, res);
+			case 1:
+				return filter.hires(sound, freq, res);
+			case 2:
+				return filter.bandpass(sound, freq, res);
+			default:
+				return filter.lores(sound, freq, res);
+		}
 	}
 
 	void renderNextBlock(AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 	{
 		for (int sample = 0; sample < numSamples; sample++)
 		{
-			double sound = env1.adsr(getOscType(), env1.trigger) * level;
-			// double filteredSound = filter1.lores(sound, 1000, 0.1);
-
 			for (int channel = 0; channel < outputBuffer.getNumChannels(); channel++)
 			{
-				outputBuffer.addSample(channel, startSample, sound);
+				outputBuffer.addSample(channel, startSample, getSound());
 			}
 
 			startSample++;
@@ -91,8 +111,11 @@ private:
 	double level;
 	double frequency;
 	int wave;
+	int filterType;
+	double freq;
+	double res;
 	
 	maxiOsc osc1;
-	maxiEnv env1;
-	maxiFilter filter1;
+	maxiEnv env;
+	maxiFilter filter;
 };

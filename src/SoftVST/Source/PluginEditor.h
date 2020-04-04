@@ -4,6 +4,7 @@
 #include "PluginProcessor.h"
 #include "Envelope.h"
 #include "Oscillator.h"
+#include "Filter.h"
 
 //==============================================================================
 /**
@@ -21,6 +22,7 @@ public:
 private:
 	Envelope envGUI;
 	Oscillator oscGUI;
+	Filter filterGUI;
 
     SoftVstAudioProcessor& processor;
 

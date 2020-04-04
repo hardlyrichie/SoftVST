@@ -3,12 +3,13 @@
 
 //==============================================================================
 SoftVstAudioProcessorEditor::SoftVstAudioProcessorEditor (SoftVstAudioProcessor& p)
-    : AudioProcessorEditor (&p), processor (p), envGUI(p), oscGUI(p)
+    : AudioProcessorEditor (&p), processor (p), envGUI(p), oscGUI(p), filterGUI(p)
 {
     setSize (800, 800);
 
 	addAndMakeVisible(envGUI);
 	addAndMakeVisible(oscGUI);
+	addAndMakeVisible(filterGUI);
 }
 
 SoftVstAudioProcessorEditor::~SoftVstAudioProcessorEditor()
@@ -35,10 +36,9 @@ void SoftVstAudioProcessorEditor::resized()
 	const int componentWidth = 400;
 	const int componentHeight = 400;
 
-	envGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
-	oscGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
+	//envGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
+	//oscGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
+	filterGUI.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
 
 	//const int componentSize{ 100 };
-
-	//attackSlider.setBounds(bounds.removeFromTop(200).withSizeKeepingCentre(componentSize, componentSize));
 }
