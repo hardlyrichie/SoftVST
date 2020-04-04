@@ -18,6 +18,7 @@ Filter::Filter(SoftVstAudioProcessor& p) : processor(p)
 	freqSlider.setRange(20.0f, 10000.0f);
 	freqSlider.setValue(400.0f);
 	freqSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 70, 20);
+	freqSlider.setTextValueSuffix("Hz");
 	// TODO: Fix skewfactor
 	freqSlider.setSkewFactorFromMidPoint(1000.0);
 	addAndMakeVisible(freqSlider);
@@ -27,6 +28,24 @@ Filter::Filter(SoftVstAudioProcessor& p) : processor(p)
 	resSlider.setValue(1.0f);
 	resSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 70, 20);
 	addAndMakeVisible(resSlider);
+	
+	// Filter label settings
+	filterLabel.setFont(Font(24.0f, Font::bold));
+	filterLabel.setText("Filter", dontSendNotification);
+	filterLabel.attachToComponent(&filterMenu, false);
+	filterLabel.setJustificationType(Justification::centred);
+	addAndMakeVisible(filterLabel);
+
+	freqLabel.setFont(Font(18.0f));
+	freqLabel.setText("Freq", dontSendNotification);
+	freqLabel.attachToComponent(&freqSlider, false);
+	freqLabel.setJustificationType(Justification::centred);
+	addAndMakeVisible(freqLabel);
+
+	resLabel.setText("Q", dontSendNotification);
+	resLabel.attachToComponent(&resSlider, false);
+	resLabel.setJustificationType(Justification::centred);
+	addAndMakeVisible(resLabel);
 
 	// Setup apvts attachments
 	filterMenuAttachment =
@@ -46,17 +65,20 @@ Filter::~Filter()
 
 void Filter::paint (Graphics& g)
 {
-	g.fillAll(Colours::black);
+	g.fillAll(Colours::mediumvioletred);
 }
 
 void Filter::resized()
 {
-	juce::Rectangle<int> area = getLocalBounds().reduced(40);
+	juce::Rectangle<int> area = getLocalBounds().reduced(100);
+	area.setY(area.getY() - 50);
+	filterMenu.setBounds(area);
 
-	// TODO: Fix layout
-	const int componentSize = 70;
+	Grid grid;
+	using Track = Grid::TrackInfo;
 
-	filterMenu.setBounds(area.removeFromTop(20));
-	freqSlider.setBounds(area.removeFromTop(50).withSizeKeepingCentre(componentSize, componentSize));
-	resSlider.setBounds(area.removeFromTop(50).withSizeKeepingCentre(componentSize, componentSize));
+	grid.templateRows = { Track(2_fr), Track(1_fr) };
+	grid.templateColumns = { Track(1_fr), Track(1_fr) };
+	grid.items = { nullptr, nullptr, GridItem(freqSlider), GridItem(resSlider) };
+	grid.performLayout(getLocalBounds());
 }

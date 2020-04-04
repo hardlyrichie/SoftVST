@@ -18,7 +18,6 @@ public:
 		level = velocity;
 
 		frequency = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
-		Logger::outputDebugString(std::to_string(midiNoteNumber));
 	}
 
 	void stopNote(float velocity, bool allowTailOff)
@@ -67,7 +66,7 @@ public:
 	{
 		env.setAttack(*attack);
 		env.setDecay(*decay);
-		env.setSustain(*sustain);
+		env.setSustain(Decibels::decibelsToGain(*sustain));
 		env.setRelease(*release);
 	}
 

@@ -20,6 +20,7 @@ public:
 
 private:
 	ComboBox oscMenu;
+	Label oscLabel;
 
 	std::unique_ptr<AudioProcessorValueTreeState::ComboBoxAttachment> oscMenuAttachment;
 

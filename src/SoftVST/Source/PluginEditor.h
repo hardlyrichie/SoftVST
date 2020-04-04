@@ -25,6 +25,9 @@ private:
 	Filter filterGUI;
 	Slider gainSlider;
 
+	Label title;
+	Label gainLabel;
+
 	std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> gainSliderAttachment;
 
     SoftVstAudioProcessor& processor;

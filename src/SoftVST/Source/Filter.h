@@ -26,6 +26,9 @@ private:
 	ComboBox filterMenu;
 	Slider freqSlider;
 	Slider resSlider;
+	Label filterLabel;
+	Label freqLabel;
+	Label resLabel;
 
 	std::unique_ptr<AudioProcessorValueTreeState::ComboBoxAttachment> filterMenuAttachment;
 	std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> freqSliderAttachment;

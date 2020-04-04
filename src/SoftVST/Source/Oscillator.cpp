@@ -12,10 +12,15 @@ Oscillator::Oscillator(SoftVstAudioProcessor& p) : processor(p)
 	oscMenu.setJustificationType(Justification::centred); 
 	addAndMakeVisible(oscMenu);
 
+	oscLabel.setFont(Font(24.0f, Font::bold));
+	oscLabel.setText("Oscillator", dontSendNotification);
+	oscLabel.attachToComponent(&oscMenu, false);
+	oscLabel.setJustificationType(Justification::centred);
+	addAndMakeVisible(oscLabel);
+
 	oscMenuAttachment = 
 		std::make_unique<AudioProcessorValueTreeState::ComboBoxAttachment>(processor.apvts, 
 		OSC_ID, oscMenu);
-
 }
 
 Oscillator::~Oscillator()
@@ -24,28 +29,12 @@ Oscillator::~Oscillator()
 
 void Oscillator::paint (Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
-    //g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));   // clear the background
-
-    //g.setColour (Colours::grey);
-    //g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-
-    //g.setColour (Colours::white);
-    //g.setFont (14.0f);
-    //g.drawText ("Oscillator", getLocalBounds(),
-    //            Justification::centred, true);   // draw some placeholder text
-	g.fillAll(Colours::black);
+	g.fillAll(Colours::lightseagreen);
 }
 
 void Oscillator::resized()
 {
-	juce::Rectangle<int> area = getLocalBounds().reduced(40);
+	juce::Rectangle<int> area = getLocalBounds().reduced(100);
 
-	oscMenu.setBounds(area.removeFromTop(20));
+	oscMenu.setBounds(area);
 }
