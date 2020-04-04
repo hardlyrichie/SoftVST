@@ -5,6 +5,7 @@
 #include "Envelope.h"
 #include "Oscillator.h"
 #include "Filter.h"
+#include "Gain.h"
 
 //==============================================================================
 /**
@@ -23,12 +24,9 @@ private:
 	Envelope envGUI;
 	Oscillator oscGUI;
 	Filter filterGUI;
-	Slider gainSlider;
+	Gain gainGUI;
 
 	Label title;
-	Label gainLabel;
-
-	std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> gainSliderAttachment;
 
     SoftVstAudioProcessor& processor;
 

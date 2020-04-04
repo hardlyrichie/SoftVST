@@ -1,22 +1,27 @@
-/*
-  ==============================================================================
-
-    Gain.cpp
-    Created: 3 Apr 2020 7:10:58pm
-    Author:  rgao
-
-  ==============================================================================
-*/
-
 #include <JuceHeader.h>
 #include "Gain.h"
 
 //==============================================================================
-Gain::Gain()
+Gain::Gain(SoftVstAudioProcessor& p) : processor(p)
 {
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
+	setSize(400, 400);
 
+	gainSlider.setSliderStyle(Slider::SliderStyle::LinearHorizontal);
+	gainSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 100, 20);
+	gainSlider.setTextValueSuffix("dB");
+	gainSlider.setRange(-60.0f, 0.0f, 0.01f);
+	gainSlider.setValue(-3.0f);
+	addAndMakeVisible(gainSlider);
+
+	gainLabel.setFont(Font(24.0f, Font::bold));
+	gainLabel.setText("Gain Slider", dontSendNotification);
+	gainLabel.attachToComponent(&gainSlider, false);
+	gainLabel.setJustificationType(Justification::centred);
+	addAndMakeVisible(gainLabel);
+
+	gainSliderAttachment =
+		std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(processor.apvts,
+			GAIN_ID, gainSlider);
 }
 
 Gain::~Gain()
@@ -25,27 +30,12 @@ Gain::~Gain()
 
 void Gain::paint (Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
-    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));   // clear the background
-
-    g.setColour (Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-
-    g.setColour (Colours::white);
-    g.setFont (14.0f);
-    g.drawText ("Gain", getLocalBounds(),
-                Justification::centred, true);   // draw some placeholder text
+	g.fillAll(Colours::aquamarine);
 }
 
 void Gain::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
+	juce::Rectangle<int> area = getLocalBounds().reduced(70);
 
+	gainSlider.setBounds(area);
 }

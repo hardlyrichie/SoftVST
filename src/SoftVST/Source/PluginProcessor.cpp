@@ -217,7 +217,7 @@ AudioProcessorValueTreeState::ParameterLayout SoftVstAudioProcessor::createParam
 	parameters.push_back(std::make_unique<AudioParameterFloat>(RES_ID, RES_NAME, 1.0f, 5.0f, 1.0f));
 
 	// Master gain parameter
-	parameters.push_back(std::make_unique<AudioParameterFloat>(GAIN_ID, GAIN_NAME, -60.0f, 0.0f, -20.0f));
+	parameters.push_back(std::make_unique<AudioParameterFloat>(GAIN_ID, GAIN_NAME, -60.0f, 0.0f, -3.0f));
 
 
 	return { parameters.begin(), parameters.end() };
