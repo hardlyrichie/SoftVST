@@ -106,8 +106,10 @@ public:
 
 	void renderNextBlock(AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 	{
+		// Walkthrough each audio sample
 		for (int sample = 0; sample < numSamples; sample++)
 		{
+			// Walkthrough each channel, for stereo systems this is 2
 			for (int channel = 0; channel < outputBuffer.getNumChannels(); channel++)
 			{
 				outputBuffer.addSample(channel, startSample, getSound() * Decibels::decibelsToGain(gain));

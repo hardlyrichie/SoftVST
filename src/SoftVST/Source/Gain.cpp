@@ -6,6 +6,7 @@ Gain::Gain(SoftVstAudioProcessor& p) : processor(p)
 {
 	setSize(400, 400);
 
+	// Configure slider settings
 	gainSlider.setSliderStyle(Slider::SliderStyle::LinearHorizontal);
 	gainSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 100, 20);
 	gainSlider.setTextValueSuffix("dB");
@@ -13,6 +14,7 @@ Gain::Gain(SoftVstAudioProcessor& p) : processor(p)
 	gainSlider.setValue(-3.0f);
 	addAndMakeVisible(gainSlider);
 
+	// Slider label settings
 	gainLabel.setFont(Font(24.0f, Font::bold));
 	gainLabel.setText("Gain Slider", dontSendNotification);
 	gainLabel.attachToComponent(&gainSlider, false);

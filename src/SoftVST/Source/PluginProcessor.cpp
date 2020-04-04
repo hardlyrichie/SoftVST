@@ -134,6 +134,7 @@ bool SoftVstAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) 
 
 void SoftVstAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
+	// Walkthrough each synth voice and build sound
 	for (int i = 0; i < synth.getNumVoices(); i++)
 	{
 		if ((synthVoice = dynamic_cast<SynthVoice*>(synth.getVoice(i))))
@@ -200,7 +201,6 @@ AudioProcessorValueTreeState::ParameterLayout SoftVstAudioProcessor::createParam
 	std::vector<std::unique_ptr<RangedAudioParameter>> parameters;
 
 	// ADSR parameters 
-	// TODO: Look into and fix sustain range
 	parameters.push_back(std::make_unique<AudioParameterFloat>(ATTACK_ID, ATTACK_NAME, 0.0f, 5000.0f, 1.0f));
 	parameters.push_back(std::make_unique<AudioParameterFloat>(DECAY_ID, DECAY_NAME, 0.0f, 5000.0f, 600.0f));
 	parameters.push_back(std::make_unique<AudioParameterFloat>(SUSTAIN_ID, SUSTAIN_NAME, -100.0f, 0.0f, -6.0f));
@@ -218,7 +218,6 @@ AudioProcessorValueTreeState::ParameterLayout SoftVstAudioProcessor::createParam
 
 	// Master gain parameter
 	parameters.push_back(std::make_unique<AudioParameterFloat>(GAIN_ID, GAIN_NAME, -60.0f, 0.0f, -3.0f));
-
 
 	return { parameters.begin(), parameters.end() };
 }

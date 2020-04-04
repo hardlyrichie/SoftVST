@@ -71,6 +71,7 @@ void Filter::paint (Graphics& g)
 void Filter::resized()
 {
 	juce::Rectangle<int> area = getLocalBounds().reduced(100);
+	// Move filterMenu up slightly
 	area.setY(area.getY() - 50);
 	filterMenu.setBounds(area);
 

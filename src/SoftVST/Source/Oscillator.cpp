@@ -6,6 +6,7 @@ Oscillator::Oscillator(SoftVstAudioProcessor& p) : processor(p)
 {
 	setSize(400, 400);
 
+	// Configure combobox settings 
 	oscMenu.addItem("Sine", 1);
 	oscMenu.addItem("Saw", 2);
 	oscMenu.addItem("Square", 3);
@@ -15,6 +16,7 @@ Oscillator::Oscillator(SoftVstAudioProcessor& p) : processor(p)
 	oscMenu.setJustificationType(Justification::centred); 
 	addAndMakeVisible(oscMenu);
 
+	// Menu title settings
 	oscLabel.setFont(Font(24.0f, Font::bold));
 	oscLabel.setText("Oscillator", dontSendNotification);
 	oscLabel.attachToComponent(&oscMenu, false);
