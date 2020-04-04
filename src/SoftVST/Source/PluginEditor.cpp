@@ -8,7 +8,7 @@ SoftVstAudioProcessorEditor::SoftVstAudioProcessorEditor (SoftVstAudioProcessor&
     setSize(800, 600);
 
 	// Add Title
-	title.setFont(Font(48.0f, Font::bold));
+	title.setFont(Font("Verdana", 64.0f, Font::italic));
 	title.setColour(Label::textColourId, Colours::fuchsia);
 	title.setText("SoftVST", dontSendNotification);
 	title.setJustificationType(Justification::centred);
@@ -19,6 +19,9 @@ SoftVstAudioProcessorEditor::SoftVstAudioProcessorEditor (SoftVstAudioProcessor&
 	addAndMakeVisible(envGUI);
 	addAndMakeVisible(filterGUI);
 	addAndMakeVisible(gainGUI);
+
+	//allen = ImageFileFormat::loadFrom(File::getCurrentWorkingDirectory().getChildFile("po.png"));
+	allen = ImageFileFormat::loadFrom(BinaryData::allen_png, BinaryData::allen_pngSize);
 }
 
 SoftVstAudioProcessorEditor::~SoftVstAudioProcessorEditor()
@@ -29,13 +32,15 @@ SoftVstAudioProcessorEditor::~SoftVstAudioProcessorEditor()
 void SoftVstAudioProcessorEditor::paint (Graphics& g)
 {
 	g.fillAll(Colours::lightgoldenrodyellow);
+
+	g.drawImage(allen, 500, 0, 100, 100, 0, 0, allen.getWidth(), allen.getHeight());
 }
 
 void SoftVstAudioProcessorEditor::resized()
 {	
 	// Title gui placement
 	juce::Rectangle<int> area = getLocalBounds();
-	int headerHeight = 70;
+	int headerHeight = 100;
 	title.setBounds(area.removeFromTop(headerHeight));
 
 	// Componenets gui placement 

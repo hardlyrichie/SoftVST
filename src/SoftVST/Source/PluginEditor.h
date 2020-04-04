@@ -25,8 +25,9 @@ private:
 	Oscillator oscGUI;
 	Filter filterGUI;
 	Gain gainGUI;
-
 	Label title;
+
+	Image allen;
 
     SoftVstAudioProcessor& processor;
 

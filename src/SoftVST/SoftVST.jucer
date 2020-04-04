@@ -4,6 +4,7 @@
               pluginFormats="buildVST3" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="kcg9F3" name="SoftVST">
     <GROUP id="{BAE62B3D-9893-EA19-A861-AFFEAFC9A348}" name="Source">
+      <FILE id="rkGXnl" name="allen.png" compile="0" resource="1" file="Source/allen.png"/>
       <FILE id="GHfQtf" name="Gain.cpp" compile="1" resource="0" file="Source/Gain.cpp"/>
       <FILE id="a6CHkp" name="Gain.h" compile="0" resource="0" file="Source/Gain.h"/>
       <FILE id="ljVecV" name="Filter.cpp" compile="1" resource="0" file="Source/Filter.cpp"/>
