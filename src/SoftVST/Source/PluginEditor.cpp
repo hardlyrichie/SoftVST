@@ -20,7 +20,6 @@ SoftVstAudioProcessorEditor::SoftVstAudioProcessorEditor (SoftVstAudioProcessor&
 	addAndMakeVisible(filterGUI);
 	addAndMakeVisible(gainGUI);
 
-	//allen = ImageFileFormat::loadFrom(File::getCurrentWorkingDirectory().getChildFile("po.png"));
 	allen = ImageFileFormat::loadFrom(BinaryData::allen_png, BinaryData::allen_pngSize);
 }
 
