@@ -208,7 +208,7 @@ AudioProcessorValueTreeState::ParameterLayout SoftVstAudioProcessor::createParam
 
 	// Oscillator parameter
 	parameters.push_back(std::make_unique<AudioParameterChoice>(OSC_ID, OSC_NAME,
-		StringArray("Sine", "Saw", "Square"), 0));
+		StringArray("Sine", "Saw", "Square", "Phasor", "Triangle", "Noise"), 0));
 
 	// Filter parameters
 	parameters.push_back(std::make_unique<AudioParameterChoice>(FILTER_ID, FILTER_NAME,

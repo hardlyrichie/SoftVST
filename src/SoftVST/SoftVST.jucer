@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="RG7IId" name="SoftVST" projectType="audioplug" jucerVersion="5.4.7"
-              pluginFormats="buildVST3" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
+              pluginFormats="buildVST3" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
+              pluginManufacturer="Richard &amp; Sparsh">
   <MAINGROUP id="kcg9F3" name="SoftVST">
     <GROUP id="{BAE62B3D-9893-EA19-A861-AFFEAFC9A348}" name="Source">
       <FILE id="rkGXnl" name="allen.png" compile="0" resource="1" file="Source/allen.png"/>

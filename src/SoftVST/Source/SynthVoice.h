@@ -56,6 +56,12 @@ public:
 				return osc1.saw(frequency);
 			case 2:
 				return osc1.square(frequency);
+			case 3:
+				return osc1.phasor(frequency);
+			case 4:
+				return osc1.triangle(frequency);
+			case 5:
+				return osc1.noise();
 			default:
 				// TODO: throw exception if none of the waves are selected
 				return osc1.sinewave(frequency);

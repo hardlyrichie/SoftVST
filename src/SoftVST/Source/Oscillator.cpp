@@ -9,6 +9,9 @@ Oscillator::Oscillator(SoftVstAudioProcessor& p) : processor(p)
 	oscMenu.addItem("Sine", 1);
 	oscMenu.addItem("Saw", 2);
 	oscMenu.addItem("Square", 3);
+	oscMenu.addItem("Phasor", 4);
+	oscMenu.addItem("Triangle", 5);
+	oscMenu.addItem("Noise", 6);
 	oscMenu.setJustificationType(Justification::centred); 
 	addAndMakeVisible(oscMenu);
 

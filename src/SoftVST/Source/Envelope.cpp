@@ -26,7 +26,8 @@ Envelope::Envelope(SoftVstAudioProcessor& p) : processor(p)
 	sustainSlider.setValue(-6.0f);
 	sustainSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 70, 20);
 	sustainSlider.setTextValueSuffix("dB");
-	// sustainSlider.setSkewFactorFromMidPoint(-12.0);
+	// TODO: Fix skewfactor. Doesn't seem to be working
+	sustainSlider.setSkewFactorFromMidPoint(-12.0);
 	addAndMakeVisible(sustainSlider);
 
 	releaseSlider.setSliderStyle(Slider::SliderStyle::Rotary);
@@ -49,7 +50,6 @@ Envelope::Envelope(SoftVstAudioProcessor& p) : processor(p)
 	releaseSliderAttachment =
 		std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(processor.apvts,
 			RELEASE_ID, releaseSlider);
-
 }
 
 Envelope::~Envelope()

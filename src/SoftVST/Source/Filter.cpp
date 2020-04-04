@@ -19,7 +19,7 @@ Filter::Filter(SoftVstAudioProcessor& p) : processor(p)
 	freqSlider.setValue(400.0f);
 	freqSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 70, 20);
 	freqSlider.setTextValueSuffix("Hz");
-	// TODO: Fix skewfactor
+	// TODO: Fix skewfactor. Doesn't seem to be working
 	freqSlider.setSkewFactorFromMidPoint(1000.0);
 	addAndMakeVisible(freqSlider);
 
